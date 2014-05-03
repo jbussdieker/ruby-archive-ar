@@ -1,6 +1,12 @@
 # Archive::Ar
 
-TODO: Write a gem description
+[![Gem Version](https://badge.fury.io/rb/archive-ar.svg)](http://badge.fury.io/rb/archive-ar)
+[![Build Status](https://travis-ci.org/jbussdieker/ruby-archive-ar.svg)](https://travis-ci.org/jbussdieker/ruby-archive-ar)
+[![Code Climate](https://codeclimate.com/github/jbussdieker/ruby-archive-ar.png)](https://codeclimate.com/github/jbussdieker/ruby-archive-ar)
+[![Coverage Status](https://coveralls.io/repos/jbussdieker/ruby-archive-ar/badge.png)](https://coveralls.io/r/jbussdieker/ruby-archive-ar)
+[![Coverage Status](https://coveralls.io/repos/jbussdieker/ruby-archive-ar/badge.png)](https://coveralls.io/r/jbussdieker/ruby-archive-ar)
+
+Simple AR file functions
 
 ## Installation
 
