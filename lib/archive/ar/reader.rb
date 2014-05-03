@@ -39,6 +39,8 @@ module Archive
             io.read(1)
           end
         end
+
+        @records
       end
     end
   end

@@ -2,7 +2,6 @@ require "archive/ar/version"
 require "archive/ar/format"
 require "archive/ar/reader"
 require "archive/ar/writer"
-require "archive/ar/member"
 
 module Archive
   module Ar

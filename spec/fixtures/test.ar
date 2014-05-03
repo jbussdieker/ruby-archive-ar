@@ -2,10 +2,10 @@
 Gemfile         1399095295  501   20    100644  95        `
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in archive-ar.gemspec
+( Specify your gem's dependencies in archive-ar.gemspec
 gemspec
 
-Gemfile         1399095295  501   20    100644  95        `
+Semfile         1399095295  502   20    100644  95        `
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in archive-ar.gemspec
