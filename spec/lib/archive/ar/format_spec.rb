@@ -31,7 +31,7 @@ describe Archive::Ar::Format do
         :modified=>Time.parse("2014-05-02 22:34:55 -0700"),
         :owner=>1234,
         :group=>5678,
-        :mode=>"100644",
+        :mode=>"100644".to_i(8),
         :start=>60,
         :size=>95,
         :magic=>"`\n"

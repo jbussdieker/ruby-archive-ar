@@ -30,7 +30,7 @@ describe Archive::Ar::Reader do
           modified: Time.at(1399095295),
           owner: 501,
           group: 20,
-          mode: "100644",
+          mode: "100644".to_i(8),
           start: 68,
           size: 95,
           magic: "`\n",
