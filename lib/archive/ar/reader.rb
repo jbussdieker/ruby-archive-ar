@@ -7,6 +7,9 @@ module Archive
       end
 
       def extract(dest_dir, options)
+        each do |header, data|
+          Archive::Ar::Format.extract_file(dest_dir, header, data, options)
+        end
       end
 
       def each(full = false, &block)

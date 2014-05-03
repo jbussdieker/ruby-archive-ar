@@ -16,11 +16,22 @@ module Archive
             :modified => Time.at(h.shift.to_i),
             :owner => h.shift.to_i,
             :group => h.shift.to_i,
-            :mode => h.shift,
+            :mode => h.shift.to_i(8),
             :start => io.tell,
             :size => h.shift.to_i,
             :magic => h.shift,
           }
+        end
+
+        def extract_file(dest_dir, header, data, options = {})
+          file = File.join(dest_dir, header[:name])
+
+          File.open(file, "w") do |f|
+            f.write(data)
+          end
+
+          File.chmod(header[:mode], file)
+          #FileUtils.chown(header[:owner], header[:group], file)
         end
       end
     end

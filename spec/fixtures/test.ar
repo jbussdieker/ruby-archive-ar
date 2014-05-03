@@ -1,11 +1,11 @@
 !<arch>
-Gemfile         1399095295  501   20    100644  95        `
+Pjjjjjj         1399095295  501   20    100755  95        `
 source 'https://rubygems.org'
 
 ( Specify your gem's dependencies in archive-ar.gemspec
 gemspec
 
-Semfile         1399095295  502   20    100644  95        `
+Sjjjjjj         1399095295  502   20    100750  95        `
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in archive-ar.gemspec
