@@ -1,0 +1,13 @@
+!<arch>
+Gemfile         1399095295  501   20    100644  95        `
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in archive-ar.gemspec
+gemspec
+
+Gemfile         1399095295  501   20    100644  95        `
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in archive-ar.gemspec
+gemspec
+
