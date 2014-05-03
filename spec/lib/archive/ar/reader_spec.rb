@@ -26,14 +26,14 @@ describe Archive::Ar::Reader do
       let(:io) { StringIO.new("!<arch>\nGemfile         1399095295  501   20    100644  95        `\nASDF") }
       it { 
         should == { "Gemfile" => [{
-          name: "Gemfile",
-          modified: Time.at(1399095295),
-          owner: 501,
-          group: 20,
-          mode: "100644".to_i(8),
-          start: 68,
-          size: 95,
-          magic: "`\n",
+          :name => "Gemfile",
+          :modified => Time.at(1399095295),
+          :owner => 501,
+          :group => 20,
+          :mode => "100644".to_i(8),
+          :start => 68,
+          :size => 95,
+          :magic => "`\n",
         }, "ASDF"]} 
       }
     end
