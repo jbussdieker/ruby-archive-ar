@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/jbussdieker/ruby-archive-ar.svg)](https://travis-ci.org/jbussdieker/ruby-archive-ar)
 [![Code Climate](https://codeclimate.com/github/jbussdieker/ruby-archive-ar.png)](https://codeclimate.com/github/jbussdieker/ruby-archive-ar)
 [![Coverage Status](https://coveralls.io/repos/jbussdieker/ruby-archive-ar/badge.png)](https://coveralls.io/r/jbussdieker/ruby-archive-ar)
-[![Coverage Status](https://coveralls.io/repos/jbussdieker/ruby-archive-ar/badge.png)](https://coveralls.io/r/jbussdieker/ruby-archive-ar)
+[![Dependency Status](https://gemnasium.com/jbussdieker/ruby-archive-ar.svg)](https://gemnasium.com/jbussdieker/ruby-archive-ar)
 
 Simple AR file functions
 
