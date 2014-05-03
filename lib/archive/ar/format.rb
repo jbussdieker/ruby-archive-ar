@@ -11,7 +11,7 @@ module Archive
         def read_header(io)
           block = io.read(60)
           h = block.unpack("A16 Z12 a6 a6 A8 Z10 Z2")
-          {
+          header = {
             :name => h.shift,
             :modified => Time.at(h.shift.to_i),
             :owner => h.shift.to_i,
@@ -21,6 +21,14 @@ module Archive
             :size => h.shift.to_i,
             :magic => h.shift,
           }
+
+          if header[:name].start_with? "#1/"
+            long_size = header[:name][3..-1].to_i
+            header[:start] += long_size
+            header[:name] = io.read(long_size).strip
+          end
+
+          header
         end
 
         def extract_file(dest_dir, header, data, options = {})
