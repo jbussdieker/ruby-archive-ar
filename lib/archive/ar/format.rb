@@ -8,19 +8,23 @@ module Archive
           end
         end
 
-        def read_header(io)
-          block = io.read(60)
-          h = block.unpack("A16 Z12 a6 a6 A8 Z10 Z2")
-          header = {
+        def parse_header(data)
+          h = data.unpack("A16 Z12 a6 a6 A8 Z10 Z2")
+          {
             :name => h.shift,
             :modified => Time.at(h.shift.to_i),
             :owner => h.shift.to_i,
             :group => h.shift.to_i,
             :mode => h.shift.to_i(8),
-            :start => io.tell,
             :size => h.shift.to_i,
             :magic => h.shift,
           }
+        end
+
+        def read_header(io)
+          block = io.read(60)
+          header = parse_header(block)
+          header.merge! :start => io.tell
 
           if header[:name].start_with? "#1/"
             long_size = header[:name][3..-1].to_i
