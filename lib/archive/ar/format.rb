@@ -11,7 +11,7 @@ module Archive
         def parse_header(data)
           h = data.unpack("A16 Z12 a6 a6 A8 Z10 Z2")
           {
-            :name => h.shift,
+            :name => h.shift.chomp("/"), # Remove trailing slash. Some archives have this...
             :modified => Time.at(h.shift.to_i),
             :owner => h.shift.to_i,
             :group => h.shift.to_i,
