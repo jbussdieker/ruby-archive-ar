@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 AR_COMMAND = 'ar'
-ARCHIVE_AR_COMMAND = 'bundle exec ../bin/archive-ar'
+ARCHIVE_AR_COMMAND = 'bundle exec ../bin/ar.rb'
 
 def run_test(cmd)
   puts "Testing `ar #{cmd}`"
