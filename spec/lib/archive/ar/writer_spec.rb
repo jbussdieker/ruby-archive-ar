@@ -13,7 +13,7 @@ describe Archive::Ar::Writer do
     end
 
     context "one file" do
-      let(:filenames) { ["tmp/asdf"] }
+      let(:filenames) { ["spec/fixtures/file"] }
       let(:dest_file) { "tmp/test-one.ar" }
 
       it "works" do
