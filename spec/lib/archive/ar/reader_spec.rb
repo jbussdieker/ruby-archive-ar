@@ -3,7 +3,16 @@ require 'spec_helper'
 describe Archive::Ar::Reader do
   let(:options) { {} }
   let(:source) { io }
+  let(:io) { File.open("spec/fixtures/archive.ar") }
   let(:reader) { Archive::Ar::Reader.new(source, options) }
+
+  describe "extract" do
+    let(:dest_dir) { "tmp/" }
+    let(:options) { {} }
+    subject { reader.extract(dest_dir, options) }
+
+    it { should == ["file"] }
+  end
 
   describe "each" do
     context "using IO" do
