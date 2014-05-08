@@ -8,6 +8,28 @@ module Archive
           end
         end
 
+        def build_header(file)
+          header = {
+            :name => File.basename(file),
+            :modified => File.mtime(file).to_i,
+            :owner => File.stat(file).uid,
+            :group => File.stat(file).gid,
+            :mode => File.stat(file).mode,
+            :size => File.size(file),
+            :magic => "`\n"
+          }
+
+          data = ""
+          data += "%-16s" % header[:name]
+          data += "%-12s" % header[:modified]
+          data += "%-6s" % header[:owner]
+          data += "%-6s" % header[:group]
+          data += "%-8s" % header[:mode].to_s(8)
+          data += "%-10s" % header[:size]
+          data += "%2s" % header[:magic]
+          data
+        end
+
         def parse_header(data)
           h = data.unpack("A16 Z12 a6 a6 A8 Z10 Z2")
           {

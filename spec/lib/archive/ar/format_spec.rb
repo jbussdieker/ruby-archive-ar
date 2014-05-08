@@ -20,6 +20,13 @@ describe Archive::Ar::Format do
     end
   end
 
+  describe "build_header" do
+    let(:file) { "spec/fixtures/file" }
+    let(:subject) { Archive::Ar::Format.build_header(file) }
+
+    it { should == "file            1399576012  1001  1001  100664  5         `\n" }
+  end
+
   describe "read_header" do
     let(:read_header) { Archive::Ar::Format.read_header(io) }
     let(:io) { StringIO.new("Filename        1399095295  1234  5678  100644  95        `\n") }

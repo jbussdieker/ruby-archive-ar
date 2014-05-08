@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Archive::Ar::Reader do
-  let(:source) { File.open("spec/fixtures/test.ar") }
+  let(:source) { File.open("spec/fixtures/archive.ar") }
   let(:reader) { Archive::Ar::Reader.new(source, {}) }
 
   describe "parse" do

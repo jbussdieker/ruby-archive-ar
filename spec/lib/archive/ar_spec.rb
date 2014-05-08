@@ -11,13 +11,13 @@ describe Archive::Ar do
     let(:options) { {} }
     subject { Archive::Ar.traverse(source_file, options) }
 
-    context "test.ar" do
-      let(:source_file) { "spec/fixtures/test.ar" }
+    context "archive.ar" do
+      let(:source_file) { "spec/fixtures/archive.ar" }
 
-      it "yields two things" do
+      it "yields the file" do
         expect {|b|
           Archive::Ar.traverse(source_file, options, &b)
-        }.to yield_successive_args(anything, anything)
+        }.to yield_successive_args(anything)
       end
     end
   end
