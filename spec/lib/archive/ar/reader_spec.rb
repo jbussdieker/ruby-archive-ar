@@ -1,13 +1,33 @@
 require 'spec_helper'
 
 describe Archive::Ar::Reader do
-  let(:source) { File.open("spec/fixtures/archive.ar") }
-  let(:reader) { Archive::Ar::Reader.new(source, {}) }
+  let(:options) { {} }
+  let(:source) { io }
+  let(:reader) { Archive::Ar::Reader.new(source, options) }
+
+  describe "each" do
+    context "using IO" do
+      let(:io) { File.open("spec/fixtures/archive.ar") }
+
+      it "yields anything once" do
+        expect {|b|
+          reader.each(&b)
+        }.to yield_successive_args(anything)
+      end
+    end
+
+    context "using String" do
+      let(:io) { "spec/fixtures/archive.ar" }
+
+      it "yields anything once" do
+        expect {|b|
+          reader.each(&b)
+        }.to yield_successive_args(anything)
+      end
+    end
+  end
 
   describe "parse" do
-    let(:source) { io }
-    let(:options) { {} }
-    let(:reader) { Archive::Ar::Reader.new(source, options) }
     subject { reader.parse(io) }
 
     context "empty" do
