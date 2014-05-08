@@ -66,6 +66,8 @@ module Archive
 
           File.chmod(header[:mode], file)
           #FileUtils.chown(header[:owner], header[:group], file)
+
+          true
         end
       end
     end
