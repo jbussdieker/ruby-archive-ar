@@ -1,14 +1,28 @@
 require 'spec_helper'
 
 describe Archive::Ar do
+  let(:options) { {} }
+
   describe "create" do
+    let(:dest_file) { "tmp/create.ar" }
+    let(:filenames) { ["spec/fixtures/file"] }
+    subject { Archive::Ar.create(dest_file, filenames, options) }
+
+    it { should == 65 }
   end
 
   describe "extract" do
+    let(:dest_dir) { "tmp/" }
+    subject { Archive::Ar.extract(source_file, dest_dir, options) }
+
+    context "archive.ar" do
+      let(:source_file) { "spec/fixtures/archive.ar" }
+
+      it { should == ["file"] }
+    end
   end
 
   describe "traverse" do
-    let(:options) { {} }
     subject { Archive::Ar.traverse(source_file, options) }
 
     context "archive.ar" do
