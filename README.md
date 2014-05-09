@@ -24,7 +24,7 @@ Or install it yourself as:
 
 ## Usage
 
-Create an archive
+### Create an archive
 
     $ ar.rb -r somearchive.ar file1 file2
 
@@ -32,7 +32,7 @@ Create an archive
 Archive::Ar.create("somearchive.ar", ["file1", "file2"])
 `````
 
-Extract an archive
+### Extract an archive
 
     $ ar.rb -x somearchive.ar /tmp
 
@@ -40,7 +40,7 @@ Extract an archive
 Archive::Ar.extract("somearchive.ar", "/tmp")
 `````
 
-Advanced
+### Advanced
 
     $ ar.rb -t somearchive.ar
 
