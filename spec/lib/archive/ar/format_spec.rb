@@ -20,14 +20,21 @@ describe Archive::Ar::Format do
   end
 
   describe "build_header" do
-    let(:file) { "spec/fixtures/file" }
     let(:timestamp) { "%-12s" % File.mtime(file).to_i }
     let(:owner) { "%-6s" % File.stat(file).uid }
     let(:group) { "%-6s" % File.stat(file).gid }
     let(:mode) { "%-8s" % File.stat(file).mode.to_s(8) }
     let(:subject) { Archive::Ar::Format.build_header(file) }
 
-    it { should == "file            #{timestamp}#{owner}#{group}#{mode}5         `\n" }
+    context "normal single file" do
+      let(:file) { "spec/fixtures/file" }
+      it { should == "file            #{timestamp}#{owner}#{group}#{mode}5         `\n" }
+    end
+
+    context "long name single file" do
+      let(:file) { "spec/fixtures/abcdefghijklmnopqrstuvwxyz" }
+      it { should == "#1/26           #{timestamp}#{owner}#{group}#{mode}0         `\nabcdefghijklmnopqrstuvwxyz" }
+    end
   end
 
   describe "read_header" do
