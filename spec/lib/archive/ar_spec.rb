@@ -8,7 +8,7 @@ describe Archive::Ar do
     let(:filenames) { ["spec/fixtures/file"] }
     subject { Archive::Ar.create(dest_file, filenames, options) }
 
-    it { should == 65 }
+    it { should == 66 }
   end
 
   describe "extract" do

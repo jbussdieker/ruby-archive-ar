@@ -51,6 +51,12 @@ OptionParser.new do |opts|
     options[:p] = v
   end
 
+  opts.on("-r", "Replace or add the specified files to the archive.  If the archive does not exist a new archive file
+             is created.  Files that replace existing files do not change the order of the files within the ar-
+             chive.  New files are appended to the archive unless one of the options -a, -b or -i is specified.") do |v|
+    options[:r] = v
+  end
+
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
   end
@@ -59,6 +65,7 @@ end.parse!
 if options[:p]
   raise "illegal option combination for -p" if options[:t]
   raise "illegal option combination for -p" if options[:x]
+  raise "illegal option combination for -p" if options[:r]
 
   Archive::Ar.traverse(ARGV[0]) do |header, data|
     if options[:verbose]
@@ -67,6 +74,18 @@ if options[:p]
       puts
     end
     puts data
+  end
+elsif options[:r]
+  raise "illegal option combination for -r" if options[:t]
+  raise "illegal option combination for -r" if options[:x]
+
+  filename = ARGV.shift
+  unless File.exists?(filename)
+    puts "ar: creating archive #{filename}"
+    Archive::Ar.create(filename, ARGV)
+  else
+    puts "we only support create"
+    exit 1
   end
 elsif options[:t]
   raise "illegal option combination for -t" if options[:x]
