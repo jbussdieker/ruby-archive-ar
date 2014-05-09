@@ -8,8 +8,8 @@ module Archive
           end
         end
 
-        def build_header(file)
-          header = {
+        def read_file_header(file)
+          {
             :name => File.basename(file),
             :modified => File.mtime(file).to_i,
             :owner => File.stat(file).uid,
@@ -18,14 +18,19 @@ module Archive
             :size => File.size(file),
             :magic => "`\n"
           }
+        end
 
+        def build_header(file)
+          header = read_file_header(file)
           data = ""
           name_length = header[:name].length
+
           if name_length > 12
             data += "%-16s" % "#1/#{name_length}"
           else
             data += "%-16s" % header[:name]
           end
+
           data += "%-12s" % header[:modified]
           data += "%-6s" % header[:owner]
           data += "%-6s" % header[:group]
