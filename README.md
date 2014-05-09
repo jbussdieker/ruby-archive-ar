@@ -24,7 +24,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create an archive
+
+    ar.rb -r somearchive.ar file1 file2
+
+`````ruby
+Archive::Ar.create("somearchive.ar", ["file1", "file2"])
+`````
+
+Extract an archive
+
+    ar.rb -x somearchive.ar /tmp
+
+`````ruby
+Archive::Ar.extract("somearchive.ar", "/tmp")
+`````
+
+Advanced
+
+    ar.rb -t somearchive.ar
+
+`````ruby
+Archive::Ar.traverse("somearchive.ar") do |file|
+  puts file.name
+end
+`````
 
 ## Contributing
 
