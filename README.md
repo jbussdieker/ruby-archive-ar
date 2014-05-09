@@ -26,7 +26,7 @@ Or install it yourself as:
 
 Create an archive
 
-    ar.rb -r somearchive.ar file1 file2
+    $ ar.rb -r somearchive.ar file1 file2
 
 `````ruby
 Archive::Ar.create("somearchive.ar", ["file1", "file2"])
@@ -34,7 +34,7 @@ Archive::Ar.create("somearchive.ar", ["file1", "file2"])
 
 Extract an archive
 
-    ar.rb -x somearchive.ar /tmp
+    $ ar.rb -x somearchive.ar /tmp
 
 `````ruby
 Archive::Ar.extract("somearchive.ar", "/tmp")
@@ -42,7 +42,7 @@ Archive::Ar.extract("somearchive.ar", "/tmp")
 
 Advanced
 
-    ar.rb -t somearchive.ar
+    $ ar.rb -t somearchive.ar
 
 `````ruby
 Archive::Ar.traverse("somearchive.ar") do |file|
