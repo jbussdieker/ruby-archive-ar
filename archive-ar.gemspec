@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Joshua B. Bussdieker"]
   spec.email         = ["jbussdieker@gmail.com"]
   spec.summary       = %q{Simple AR file functions}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/jbussdieker/ruby-archive-ar"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
