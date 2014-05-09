@@ -20,25 +20,27 @@ module Archive
           }
         end
 
-        def build_header(file)
-          header = read_file_header(file)
+        def header_to_s(header)
           data = ""
-          name_length = header[:name].length
-
-          if name_length > 12
-            data += "%-16s" % "#1/#{name_length}"
+          name = header[:name]
+          if name.length > 12
+            data += "%-16s" % "#1/#{name.length}"
           else
-            data += "%-16s" % header[:name]
+            data += "%-16s" % name
           end
-
           data += "%-12s" % header[:modified]
           data += "%-6s" % header[:owner]
           data += "%-6s" % header[:group]
           data += "%-8s" % header[:mode].to_s(8)
           data += "%-10s" % header[:size]
           data += "%2s" % header[:magic]
-          data += header[:name] if name_length > 12
+          data += name if name.length > 12
           data
+        end
+
+        def build_header(file)
+          header = read_file_header(file)
+          header_to_s(header)
         end
 
         def parse_header(data)
