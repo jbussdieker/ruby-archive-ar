@@ -111,7 +111,7 @@ elsif options[:x]
   if options[:verbose]
     Archive::Ar.traverse(ARGV[0]) do |header, data|
       puts "x - #{header[:name]}"
-      Archive::Ar::Format.extract_file(Dir.pwd, header, data)
+      Archive::Ar::Format::BSD.extract_file(Dir.pwd, header, data)
     end
   else
     Archive::Ar.extract(ARGV[0], Dir.pwd)
