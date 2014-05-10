@@ -44,16 +44,16 @@ module Archive
           end
 
           def header_to_s(header)
-            data = ""
-            data += "%-16s" % header[:name]
-            data += "%-12s" % header[:modified]
-            data += "%-6s" % header[:owner]
-            data += "%-6s" % header[:group]
-            data += "%-8s" % header[:mode].to_s(8)
-            data += "%-10s" % header[:size]
-            data += "%2s" % header[:magic]
-            data += header[:long_name]
-            data
+            [
+              "%-16s" % header[:name],
+              "%-12s" % header[:modified],
+              "%-6s" % header[:owner],
+              "%-6s" % header[:group],
+              "%-8s" % header[:mode].to_s(8),
+              "%-10s" % header[:size],
+              "%2s" % header[:magic],
+              header[:long_name],
+            ].join
           end
         end
       end
