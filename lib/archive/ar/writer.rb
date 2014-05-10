@@ -3,10 +3,11 @@ module Archive
     class Writer
       def initialize(filenames)
         @filenames = filenames
+        @format = Archive::Ar::Format::BSD
       end
 
       def build_ar_entry(file)
-        header = Archive::Ar::Format.build_header(file)
+        header = @format.build_header(file)
         data = File.read(file)
         data += "\n" if (data.length + header.length) % 2 == 1
         [header, data].join

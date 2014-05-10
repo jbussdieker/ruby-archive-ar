@@ -4,11 +4,12 @@ module Archive
       def initialize(source, options)
         @source = source 
         @options = options
+        @format = Archive::Ar::Format::BSD
       end
 
       def extract(dest_dir, options)
         each do |header, data|
-          Archive::Ar::Format.extract_file(dest_dir, header, data, options)
+          @format.extract_file(dest_dir, header, data, options)
         end
       end
 
@@ -27,10 +28,10 @@ module Archive
         @index = []
         @records = {}
 
-        Archive::Ar::Format.read_global_header(io)
+        @format.read_global_header(io)
         
         until io.eof?
-          header = Archive::Ar::Format.read_header(io)
+          header = @format.read_header(io)
           size = header[:size]
           name = header[:name]
 

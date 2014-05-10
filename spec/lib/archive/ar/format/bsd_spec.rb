@@ -1,7 +1,7 @@
 require 'spec_helper' 
-describe Archive::Ar::Format do
+describe Archive::Ar::Format::BSD do
   describe "read_global_header" do
-    let(:read_global_header) { Archive::Ar::Format.read_global_header(io) }
+    let(:read_global_header) { Archive::Ar::Format::BSD.read_global_header(io) }
     subject { read_global_header }
 
     context "when valid" do
@@ -24,7 +24,7 @@ describe Archive::Ar::Format do
     let(:owner) { "%-6s" % File.stat(file).uid }
     let(:group) { "%-6s" % File.stat(file).gid }
     let(:mode) { "%-8s" % File.stat(file).mode.to_s(8) }
-    let(:subject) { Archive::Ar::Format.build_header(file) }
+    let(:subject) { Archive::Ar::Format::BSD.build_header(file) }
 
     context "normal single file" do
       let(:file) { "spec/fixtures/file" }
@@ -38,7 +38,7 @@ describe Archive::Ar::Format do
   end
 
   describe "read_header" do
-    let(:read_header) { Archive::Ar::Format.read_header(io) }
+    let(:read_header) { Archive::Ar::Format::BSD.read_header(io) }
     let(:io) { StringIO.new(payload) }
     subject { read_header }
 
@@ -82,7 +82,7 @@ describe Archive::Ar::Format do
     let(:header) { { :name => "file", :mode => 0100644 } }
     let(:data) { "test" }
     let(:options) { {} }
-    subject { Archive::Ar::Format.extract_file(dest_dir, header, data, options) }
+    subject { Archive::Ar::Format::BSD.extract_file(dest_dir, header, data, options) }
 
     it { should == true }
   end
