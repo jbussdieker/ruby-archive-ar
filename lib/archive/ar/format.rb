@@ -24,11 +24,6 @@ module Archive
           true
         end
 
-        def build_header(file)
-          header = read_file_header(file)
-          header_to_s(header)
-        end
-
         private
 
         def read_file_header(file)

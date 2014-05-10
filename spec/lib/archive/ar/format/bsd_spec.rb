@@ -1,42 +1,6 @@
 require 'spec_helper' 
+
 describe Archive::Ar::Format::BSD do
-  describe "read_global_header" do
-    let(:read_global_header) { Archive::Ar::Format::BSD.read_global_header(io) }
-    subject { read_global_header }
-
-    context "when valid" do
-      let(:io) { StringIO.new("!<arch>\n") }
-
-      it { should == "!<arch>\n" }
-    end
-
-    context "when invalid" do
-      let(:io) { StringIO.new("") }
-
-      it "should raise exception" do
-        expect { subject }.to raise_error
-      end
-    end
-  end
-
-  describe "build_header" do
-    let(:timestamp) { "%-12s" % File.mtime(file).to_i }
-    let(:owner) { "%-6s" % File.stat(file).uid }
-    let(:group) { "%-6s" % File.stat(file).gid }
-    let(:mode) { "%-8s" % File.stat(file).mode.to_s(8) }
-    let(:subject) { Archive::Ar::Format::BSD.build_header(file) }
-
-    context "normal single file" do
-      let(:file) { "spec/fixtures/file" }
-      it { should == "file            #{timestamp}#{owner}#{group}#{mode}5         `\n" }
-    end
-
-    context "long name single file" do
-      let(:file) { "spec/fixtures/abcdefghijklmnopqrstuvwxyz" }
-      it { should == "#1/28           #{timestamp}#{owner}#{group}#{mode}28        `\nabcdefghijklmnopqrstuvwxyz\0\0" }
-    end
-  end
-
   describe "read_header" do
     let(:read_header) { Archive::Ar::Format::BSD.read_header(io) }
     let(:io) { StringIO.new(payload) }
@@ -77,13 +41,21 @@ describe Archive::Ar::Format::BSD do
     end
   end
 
-  describe "extract_file" do
-    let(:dest_dir) { "tmp/" }
-    let(:header) { { :name => "file", :mode => 0100644 } }
-    let(:data) { "test" }
-    let(:options) { {} }
-    subject { Archive::Ar::Format::BSD.extract_file(dest_dir, header, data, options) }
+  describe "build_header" do
+    let(:timestamp) { "%-12s" % File.mtime(file).to_i }
+    let(:owner) { "%-6s" % File.stat(file).uid }
+    let(:group) { "%-6s" % File.stat(file).gid }
+    let(:mode) { "%-8s" % File.stat(file).mode.to_s(8) }
+    let(:subject) { Archive::Ar::Format::BSD.build_header(file) }
 
-    it { should == true }
+    context "normal single file" do
+      let(:file) { "spec/fixtures/file" }
+      it { should == "file            #{timestamp}#{owner}#{group}#{mode}5         `\n" }
+    end
+
+    context "long name single file" do
+      let(:file) { "spec/fixtures/abcdefghijklmnopqrstuvwxyz" }
+      it { should == "#1/28           #{timestamp}#{owner}#{group}#{mode}28        `\nabcdefghijklmnopqrstuvwxyz\0\0" }
+    end
   end
 end
