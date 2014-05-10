@@ -25,25 +25,27 @@ module Archive
           def build_header(file)
             header = read_file_header(file)
             header = adjust_header(header)
-            header_to_s(header)
+            render_header(header).join
           end
 
           private
 
           def adjust_header(header)
+            header[:long_name] = ""
+
             if header[:name].length > 16
               namebuf = header[:name]
               namebuf += "\0" * (4 - namebuf.length % 4) if (namebuf.length % 4) != 0
-              header[:size] += namebuf.length
-              header[:long_name] = namebuf
+
               header[:name] = "#1/#{namebuf.length}"
-            else
-              header[:long_name] = ""
+              header[:long_name] = namebuf
+              header[:size] += namebuf.length
             end
+
             header
           end
 
-          def header_to_s(header)
+          def render_header(header)
             [
               "%-16s" % header[:name],
               "%-12s" % header[:modified],
@@ -53,7 +55,7 @@ module Archive
               "%-10s" % header[:size],
               "%2s" % header[:magic],
               header[:long_name],
-            ].join
+            ]
           end
         end
       end
