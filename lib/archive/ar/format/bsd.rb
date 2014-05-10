@@ -43,7 +43,7 @@ module Archive
             header[:long_name] = ""
 
             if header[:name].length > 16
-              namebuf = pad_name(name)
+              namebuf = pad_name(header[:name])
               header[:name] = "#1/#{namebuf.length}"
               header[:long_name] = namebuf
               header[:size] += namebuf.length
@@ -54,14 +54,14 @@ module Archive
 
           def render_list(header)
             [
-              "%-16s", header[:name],
-              "%-12s", header[:modified],
-              "%-6s", header[:owner],
-              "%-6s", header[:group],
-              "%-8s", header[:mode].to_s(8),
-              "%-10s", header[:size],
-              "%2s", header[:magic],
-              "%s", header[:long_name],
+              ["%-16s", header[:name]],
+              ["%-12s", header[:modified]],
+              ["%-6s", header[:owner]],
+              ["%-6s", header[:group]],
+              ["%-8s", header[:mode].to_s(8)],
+              ["%-10s", header[:size]],
+              ["%2s", header[:magic]],
+              ["%s", header[:long_name]],
             ]
           end
         end
