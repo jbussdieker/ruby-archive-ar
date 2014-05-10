@@ -37,6 +37,8 @@ module Archive
               header[:size] += namebuf.length
               header[:long_name] = namebuf
               header[:name] = "#1/#{namebuf.length}"
+            else
+              header[:long_name] = ""
             end
             header
           end
@@ -50,7 +52,7 @@ module Archive
             data += "%-8s" % header[:mode].to_s(8)
             data += "%-10s" % header[:size]
             data += "%2s" % header[:magic]
-            data += header[:long_name] if header[:long_name]
+            data += header[:long_name]
             data
           end
         end
