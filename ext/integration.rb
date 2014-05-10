@@ -6,12 +6,14 @@ AR_COMMAND = 'ar'
 ARCHIVE_AR_COMMAND = 'bundle exec ../bin/ar.rb'
 
 def run_test(cmd, md5file = nil)
+  pass = true
   puts "Testing `ar #{cmd}`"
 
   # Test original
   out_ar = `#{AR_COMMAND} #{cmd} 2>&1`
   if md5file
     md5_ar = Digest::MD5.file(md5file)
+    file_ar = File.read(md5file)
     FileUtils.rm_rf(md5file)
   end
 
@@ -19,26 +21,38 @@ def run_test(cmd, md5file = nil)
   out_archive_ar = `#{ARCHIVE_AR_COMMAND} #{cmd} 2>&1`
   if md5file
     md5_archive_ar = Digest::MD5.file(md5file)
+    file_archive_ar = File.read(md5file)
     FileUtils.rm_rf(md5file)
   end
 
   if md5_ar != md5_archive_ar
+    pass = false
+
     puts " Error #{cmd}"
     puts " File mismatch:"
     puts "   Expected: #{md5_ar}"
     puts "        Got: #{md5_archive_ar}"
+    puts "   Expected:"
+    puts "--------------------"
+    puts file_ar
+    puts "--------------------"
+    puts "        Got:"
+    puts "--------------------"
+    puts file_archive_ar
+    puts "--------------------"
   end
 
   if out_ar != out_archive_ar
+    pass = false
+
     puts " Error #{cmd}"
     puts " Expected:"
     out_ar.split("\n").each {|l| puts "  | #{l}"}
     puts " Got:"
     out_archive_ar.split("\n").each {|l| puts "  | #{l}"}
-    false
-  else
-    true
   end
+
+  pass
 end
 
 run_test("-r integration-temp.ar myfile", "integration-temp.ar")
