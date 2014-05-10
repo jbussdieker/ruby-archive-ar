@@ -4,7 +4,7 @@ describe Archive::Ar do
   let(:options) { {} }
 
   describe "create" do
-    let(:dest_file) { "tmp/create.ar" }
+    let(:dest_file) { "tmp/create.a" }
     let(:filenames) { ["spec/fixtures/file"] }
     subject { Archive::Ar.create(dest_file, filenames, options) }
 
@@ -16,7 +16,7 @@ describe Archive::Ar do
     subject { Archive::Ar.extract(source_file, dest_dir, options) }
 
     context "archive.ar" do
-      let(:source_file) { "spec/fixtures/archive.ar" }
+      let(:source_file) { "spec/fixtures/archive.a" }
 
       it { should == ["file"] }
     end
@@ -26,7 +26,7 @@ describe Archive::Ar do
     subject { Archive::Ar.traverse(source_file, options) }
 
     context "archive.ar" do
-      let(:source_file) { "spec/fixtures/archive.ar" }
+      let(:source_file) { "spec/fixtures/archive.a" }
 
       it "yields the file" do
         expect {|b|

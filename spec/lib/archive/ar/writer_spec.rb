@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Archive::Ar::Writer do
   let(:filenames) { [] }
-  let(:dest_file) { "tmp/test.ar" }
+  let(:dest_file) { "tmp/test.a" }
   let(:writer) { Archive::Ar::Writer.new(filenames) }
 
   describe "write" do
@@ -14,7 +14,7 @@ describe Archive::Ar::Writer do
 
     context "one file" do
       let(:filenames) { ["spec/fixtures/file"] }
-      let(:dest_file) { "tmp/test-one.ar" }
+      let(:dest_file) { "tmp/test-one.a" }
 
       it "works" do
         writer.write(dest_file)

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Archive::Ar::Reader do
   let(:options) { {} }
   let(:source) { io }
-  let(:io) { File.open("spec/fixtures/archive.ar") }
+  let(:io) { File.open("spec/fixtures/archive.a") }
   let(:reader) { Archive::Ar::Reader.new(source, options) }
 
   describe "extract" do
@@ -16,7 +16,7 @@ describe Archive::Ar::Reader do
 
   describe "each" do
     context "using IO" do
-      let(:io) { File.open("spec/fixtures/archive.ar") }
+      let(:io) { File.open("spec/fixtures/archive.a") }
 
       it "yields anything once" do
         expect {|b|
@@ -26,7 +26,7 @@ describe Archive::Ar::Reader do
     end
 
     context "using String" do
-      let(:io) { "spec/fixtures/archive.ar" }
+      let(:io) { "spec/fixtures/archive.a" }
 
       it "yields anything once" do
         expect {|b|
