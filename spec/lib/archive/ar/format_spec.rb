@@ -33,7 +33,7 @@ describe Archive::Ar::Format do
 
     context "long name single file" do
       let(:file) { "spec/fixtures/abcdefghijklmnopqrstuvwxyz" }
-      it { should == "#1/26           #{timestamp}#{owner}#{group}#{mode}0         `\nabcdefghijklmnopqrstuvwxyz" }
+      it { should == "#1/28           #{timestamp}#{owner}#{group}#{mode}28        `\nabcdefghijklmnopqrstuvwxyz\0\0" }
     end
   end
 
