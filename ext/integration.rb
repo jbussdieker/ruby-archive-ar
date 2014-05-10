@@ -42,7 +42,10 @@ def run_test(cmd, md5file = nil)
 end
 
 run_test("-r integration-temp.ar myfile", "integration-temp.ar")
+run_test("-r integration-temp.ar abcdefghijklmnopqrstuvwxyz", "integration-temp.ar")
 run_test("-r integration-temp.ar myfile.even", "integration-temp.ar")
+run_test("-r integration-temp.ar myfile myfile.even", "integration-temp.ar")
+run_test("-r integration-temp.ar aaaaaaaaaaaaaaaa bbbbbbbbbbbbbbbbb cccccccccccccccccc ddddddddddddddddddd eeeeeeeeeeeeeeeeeeee fffffffffffffffffffff gggggggggggggggggggggg", "integration-temp.ar")
 run_test("-t test.ar")
 run_test("-tv test.ar")
 run_test("-p test.ar")

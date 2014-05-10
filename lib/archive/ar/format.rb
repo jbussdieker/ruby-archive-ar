@@ -22,11 +22,13 @@ module Archive
 
         def header_to_s(header)
           data = ""
-          name = header[:name]
-          if name.length > 12
-            data += "%-16s" % "#1/#{name.length}"
+          namebuf = header[:name]
+          if namebuf.length > 16
+            namebuf += "\0" * (4 - namebuf.length % 4) if (namebuf.length % 4) != 0
+            data += "%-16s" % "#1/#{namebuf.length}"
+            header[:size] += namebuf.length
           else
-            data += "%-16s" % name
+            data += "%-16s" % header[:name]
           end
           data += "%-12s" % header[:modified]
           data += "%-6s" % header[:owner]
@@ -34,7 +36,7 @@ module Archive
           data += "%-8s" % header[:mode].to_s(8)
           data += "%-10s" % header[:size]
           data += "%2s" % header[:magic]
-          data += name if name.length > 12
+          data += namebuf if header[:name].length > 16
           data
         end
 

@@ -1,4 +1,6 @@
 language: ruby
+before_script:
+  - cd ext; ./integration.rb
 rvm:
   - 2.1.1
   - 1.9.3
