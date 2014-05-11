@@ -7,18 +7,18 @@ module Archive
       class << self
         def read_global_header(io)
           io.read(8).tap do |global_header|
-            raise "Invalid header" unless global_header == Archive::Ar::MAGIC
+            raise "Invalid header" unless global_header == MAGIC
           end
         end
 
         def extract_file(dest_dir, header, data, options = {})
-          file = File.join(dest_dir, header[:name])
+          file = ::File.join(dest_dir, header[:name])
 
-          File.open(file, "w") do |f|
+          ::File.open(file, "w") do |f|
             f.write(data)
           end
 
-          File.chmod(header[:mode], file)
+          ::File.chmod(header[:mode], file)
           #FileUtils.chown(header[:owner], header[:group], file)
 
           true
@@ -28,12 +28,12 @@ module Archive
 
         def read_file_header(file)
           {
-            :name => File.basename(file),
-            :modified => File.mtime(file).to_i,
-            :owner => File.stat(file).uid,
-            :group => File.stat(file).gid,
-            :mode => File.stat(file).mode,
-            :size => File.size(file),
+            :name => ::File.basename(file),
+            :modified => ::File.mtime(file).to_i,
+            :owner => ::File.stat(file).uid,
+            :group => ::File.stat(file).gid,
+            :mode => ::File.stat(file).mode,
+            :size => ::File.size(file),
             :magic => "`\n"
           }
         end

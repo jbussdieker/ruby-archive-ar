@@ -3,12 +3,12 @@ module Archive
     class Writer
       def initialize(filenames)
         @filenames = filenames
-        @format = Archive::Ar::Format::BSD
+        @format = Format::BSD
       end
 
       def build_ar_entry(file)
         header = @format.build_header(file)
-        data = File.read(file)
+        data = ::File.read(file)
         data += "\n" if (data.length + header.length) % 2 == 1
         [header, data].join
       end
@@ -20,9 +20,9 @@ module Archive
       end
 
       def write(dest_file, options = {})
-        File.open(dest_file, 'w') do |f|
+        ::File.open(dest_file, 'w') do |f|
           data = build_ar.join("")
-          f.write(Archive::Ar::MAGIC)
+          f.write(MAGIC)
           f.write(data)
         end
       end

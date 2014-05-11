@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Archive::Ar do
   let(:options) { {} }
+  let(:source_file) { "spec/fixtures/archive.a" }
 
   describe "create" do
     let(:dest_file) { "tmp/create.a" }
@@ -16,8 +17,6 @@ describe Archive::Ar do
     subject { Archive::Ar.extract(source_file, dest_dir, options) }
 
     context "archive.ar" do
-      let(:source_file) { "spec/fixtures/archive.a" }
-
       it { should == ["file"] }
     end
   end
@@ -26,13 +25,17 @@ describe Archive::Ar do
     subject { Archive::Ar.traverse(source_file, options) }
 
     context "archive.ar" do
-      let(:source_file) { "spec/fixtures/archive.a" }
-
       it "yields the file" do
         expect {|b|
           Archive::Ar.traverse(source_file, options, &b)
         }.to yield_successive_args(anything)
       end
     end
+  end
+
+  describe "open" do
+    subject { Archive::Ar.open(source_file) }
+
+    it { should be_kind_of Archive::Ar::Archive }
   end
 end

@@ -2,9 +2,9 @@ module Archive
   module Ar
     class Reader
       def initialize(source, options)
-        @source = source 
+        @source = source
         @options = options
-        @format = Archive::Ar::Format::BSD
+        @format = Format::BSD
       end
 
       def extract(dest_dir, options)
@@ -18,7 +18,7 @@ module Archive
           when IO
             parse(@source, full); @source.rewind
           else
-            File.open(@source, 'r') { |f| parse(f, full) }
+            ::File.open(@source, 'r') { |f| parse(f, full) }
         end
 
         @index.each { |path| yield *(@records[path]) }

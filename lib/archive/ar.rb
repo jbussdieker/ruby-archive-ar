@@ -1,4 +1,6 @@
 require "archive/ar/version"
+require "archive/ar/archive"
+require "archive/ar/file"
 require "archive/ar/format"
 require "archive/ar/reader"
 require "archive/ar/writer"
@@ -17,6 +19,10 @@ module Archive
 
     def self.traverse(source_file, options = {}, &block)
       Reader.new(source_file, options).each(&block)
+    end
+
+    def self.open(source_file)
+      Archive.new(source_file)
     end
   end
 end
