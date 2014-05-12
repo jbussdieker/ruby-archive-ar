@@ -1,5 +1,5 @@
 #!/bin/bash
-version=gnu
+version=bsd
 echo "foo" > a
 rm -f $version-01-basic-even-size.a
 ar -r $version-01-basic-even-size.a a
@@ -36,10 +36,14 @@ echo "foobar" > aaaaaaaaaaaaaaaaaaaa
 rm -f $version-09-20-char-filename.a
 ar -r $version-09-20-char-filename.a aaaaaaaaaaaaaaaaaaaa
 
+echo "foobar" > aaaaaaaaaaaaaaaaaaaaa
+rm -f $version-10-21-char-filename.a
+ar -r $version-10-21-char-filename.a aaaaaaaaaaaaaaaaaaaaa
+
 echo "foobar" > aaaaaaaaaaaaaaaaaaaa
-rm -f $version-10-multiple-long-filenames.a
-ar -r $version-10-multiple-long-filenames.a aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa
+rm -f $version-11-multiple-long-filenames.a
+ar -r $version-11-multiple-long-filenames.a aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa
 
 echo "foobar" > b
-rm -f $version-11-small-file.a
-ar -r $version-11-small-file.a b
+rm -f $version-12-small-file.a
+ar -r $version-12-small-file.a b
